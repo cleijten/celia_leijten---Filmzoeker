@@ -8,14 +8,16 @@ const setToDoList = async () => {
     const li = document.createElement("li");
     li.setAttribute("class", "todo-item");
     li.setAttribute("data-key", todo._id);
-    if (todo.done) {
-      li.classList.add("done");
-    }
-    li.innerHTML = `<input type="checkbox" name="taskcheck" id="${todo._id}" /><label for="${todo._id}" class="tick"></label><span>${todo.description}</span>
+    if (todo.done) li.classList.add("done");
+    
+    li.innerHTML = `<input type="checkbox" ${todo.done ? "checked" : ""} name="taskcheck" id="${todo._id}" /><label for="${todo._id}" class="tick"></label><span>${todo.description}</span>
     <img src="images/icons8-delete-64.png" class="delete-todo js-delete-todo">`;
     ulElement.appendChild(li);
   });
 };
+// ${todo.done ? "checked" : "" is een korte manier om if else te schrijven, if todo.done is true, dan voeg "checked" to aan class, anders niets.
+
+
 
 //function for adding a todo item
 const toDoItem = () => {
@@ -63,11 +65,12 @@ const setTodoToDone = async () => {
     const id = item.id;
     item.addEventListener("change", (event) => {
       const li = event.target.parentElement;
-      li.classList.add("done");
-      putToDo(id);
+      item.checked ? li.classList.add("done") : li.classList.remove("done");
+      putToDo(id, item.checked);
     });
   });
 };
+//if item "checked" than voeg class "done" to, anders remove "done"
 
 //function for updating a todo item - werkt niet
 const updateTodo = async () => {
