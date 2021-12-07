@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+li {
+  list-style-type: none;
+  border-bottom: 3px solid white;
+  padding: 5px;
+
+}
+
+ul {
+padding-inline-start: 0px;
+
+}
+
+.lists {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 50px;
+
+}
+
+button {
+  background-color: grey;
+  color: white;
+  padding: 10px;
+  border: 0px;
+  border-radius: 4px;
+  cursor:pointer;
+}
+
+.list-item-grocery {
+  background-color: rgb(204, 219, 238);
+}
+.list-item-grocery:nth-child(2n){
+  background-color: rgb(170, 188, 212)
+}
+
+.list-item-shop {
+  background-color: rgb(207, 243, 207);
+}
+
+.list-item-shop:nth-child(2n){
+  background-color: rgb(187, 228, 187);
+}
+
+input {
+  margin-right: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 0.5px solid grey;
+}
