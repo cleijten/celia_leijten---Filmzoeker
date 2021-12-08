@@ -15,8 +15,8 @@ class Container extends Component {
         { id: 4, title: "Lettuce" },
       ],
       shoppingListItems: [
-        { id: 1, title: "Chicken" },
-        { id: 2, title: "Beef" },
+        { id: 1, title: "Chicken", amount: 2 },
+        { id: 2, title: "Beef", amount: 1 },
       ],
     };
     this.handleClickGroceryItem = this.handleClickGroceryItem.bind(this);
@@ -24,56 +24,69 @@ class Container extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+  
   handleClickGroceryItem(event) {
-    console.log("item clicked", event.target, this.state.groceryItems.title);
+    console.log("item clicked", event.target);
     this.setState((prevState) => {
-      const newShoppingListItems = [...prevState.shoppingListItems];
-      // console.log("new shopping list items", newShoppingListItems);
-      const newShoppingListItem = {
-        id: prevState.shoppingListItems.length + 1,
-        title: event.target.innerHTML,
-      };
-      newShoppingListItems.push(newShoppingListItem);
-      const newState = {
-        ...prevState,
-        shoppingListItems: newShoppingListItems,
-      };
-      // console.log("new state", newState);
-      return newState;
+      const foundTitle = prevState.shoppingListItems.find(({ title }) => title === event.target.innerHTML)
+      
+    console.log("een", foundTitle)
+      if (foundTitle) {
+         console.log("twee", foundTitle)
+        foundTitle.amount = foundTitle.amount + 1
+         console.log("drie", foundTitle)
+        this.setState({})
+         console.log("vier", foundTitle, prevState)
+        
+      } else {
+        const newShoppingListItems = [...prevState.shoppingListItems];
+        // console.log("new shopping list items", newShoppingListItems);
+        const newShoppingListItem = {
+          id: prevState.shoppingListItems.length + 1,
+          title: event.target.innerHTML,
+          amount: 1
+        };
+        newShoppingListItems.push(newShoppingListItem);
+        const newState = {
+          ...prevState,
+          shoppingListItems: newShoppingListItems,
+        };
+        // console.log("new state", newState);
+        return newState;
+      }
     });
   }
 
   handleClickEmptyCart(event) {
-    console.log("button clicked");
+  //  console.log("button clicked");
     this.setState({ shoppingListItems: [] });
   }
 
   handleChange(event) {
     const { name, value } = event.target;
-    console.log("value", value);
+  //  console.log("value", value);
     this.setState({ [name]: value });
   }
 
   handleSubmit(event) {
-    alert("submit");
+   
     event.preventDefault();
 
     this.setState((prevState) => {
-      console.log("this state", this.state, "prev state", prevState);
+     // console.log("this state", this.state, "prev state", prevState);
       const newGroceryItems = [...prevState.groceryItems];
-      console.log("newGroceryItems", newGroceryItems);
+     // console.log("newGroceryItems", newGroceryItems);
       const newGroceryItem = {
         id: prevState.groceryItems.length + 1,
         title: this.state.title,
       };
-      console.log("newGroceryItem", newGroceryItem);
+    //  console.log("newGroceryItem", newGroceryItem);
       newGroceryItems.push(newGroceryItem);
       const newStateGrocery = {
         ...prevState,
         groceryItems: newGroceryItems,
       };
-      console.log("newstate grocery", newStateGrocery);
+    //  console.log("newstate grocery", newStateGrocery);
       return newStateGrocery;
     });
   }
@@ -92,24 +105,30 @@ class Container extends Component {
     });
 
     const shoppingCartComponents = this.state.shoppingListItems.map((item) => {
+
+   
+    
       return (
         <ShoppingCart
           key={item.id}
           product={item}
           className="list-item-shop"
           value={item.title}
+          
         />
       );
     });
     //   console.log("grocery", groceryComponents, "shopping", shoppingCartComponents)
     return (
+      
       <div className="lists">
+        {console.log(shoppingCartComponents)}
         <div>
           <h2>Grocery List</h2>
            <FormComponent
             handleChange={this.handleChange}
             data={this.state}
-            onSubmit={this.handleSubmit}
+            handleSubmit={this.handleSubmit}
           />
           <ul>{groceryComponents}</ul>
          

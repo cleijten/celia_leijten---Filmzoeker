@@ -8,7 +8,8 @@ function ShoppingCart(props) {
   
     return (
        
-            <List {...props}/>
+        //    <List {...props}/>
+        <List {...props} />
        
     )
 
