@@ -1,59 +1,65 @@
+@import url(https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap);
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #efefef;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 li {
   list-style-type: none;
-  border-bottom: 3px solid white;
+  border-bottom: 5px solid #fff;
   padding: 5px;
+}
 
+.grocery-ul li {
+  list-style-type: none;
+  border-bottom: 1px solid #333;
+  padding: 2px;
 }
 
 ul {
-padding-inline-start: 0px;
-
+  padding-inline-start: 0px;
 }
 
 .lists {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 50px;
-
+  margin: 10px auto;
+  border: 1px solid lightgray;
+  padding: 30px;
+  width: 60%;
+  background-color: white;
+  box-shadow: 0 10px 15px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
 }
 
 button {
-  background-color: grey;
+  background-color: rgb(231, 178, 3);
   color: white;
   padding: 10px;
   border: 0px;
   border-radius: 4px;
-  cursor:pointer;
-}
-
-.list-item-grocery {
-  background-color: rgb(204, 219, 238);
-}
-.list-item-grocery:nth-child(2n){
-  background-color: rgb(170, 188, 212)
+  cursor: pointer;
 }
 
 .list-item-shop {
-  background-color: rgb(207, 243, 207);
+  background-color: lightgray;
 }
 
-.list-item-shop:nth-child(2n){
-  background-color: rgb(187, 228, 187);
+.list-item-shop:nth-child(2n) {
+  background-color: rgb(194, 194, 194);
 }
 
 input {
@@ -61,4 +67,35 @@ input {
   padding: 10px;
   border-radius: 4px;
   border: 0.5px solid grey;
+  font-family: "Reenie Beanie";
+  font-size: 20px;
+}
+
+.grocery-list {
+  margin-top: 0px;
+  position: relative;
+}
+
+.grocery-ul {
+  color: #333;
+
+  position: relative;
+  font-family: "Reenie Beanie";
+  font-size: 30px;
+  width: 80%;
+
+  margin: 20px auto;
+
+  padding: 20px;
+
+  box-shadow: 0 10px 15px 2px rgba(0, 0, 0, 0.2);
+}
+
+.yellow {
+  background: rgb(252, 241, 195);
+}
+
+.amount {
+  font-weight: bold;
+  
 }

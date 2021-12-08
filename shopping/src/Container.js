@@ -24,70 +24,68 @@ class Container extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
+
   handleClickGroceryItem(event) {
-    console.log("item clicked", event.target);
     this.setState((prevState) => {
-      const foundTitle = prevState.shoppingListItems.find(({ title }) => title === event.target.innerHTML)
-      
-    console.log("een", foundTitle)
+      const prevShoppingList = prevState.shoppingListItems;
+      const foundTitle = prevShoppingList.find(
+        ({ title }) => title === event.target.innerHTML
+      );
+      const index = prevShoppingList.indexOf(foundTitle);
+
       if (foundTitle) {
-         console.log("twee", foundTitle)
-        foundTitle.amount = foundTitle.amount + 1
-         console.log("drie", foundTitle)
-        this.setState({})
-         console.log("vier", foundTitle, prevState)
-        
+        prevShoppingList[index] = {
+          ...foundTitle,
+          amount: foundTitle.amount + 1,
+        };
+
+        return { ...prevState, shoppingListItems: [...prevShoppingList] };
+
       } else {
         const newShoppingListItems = [...prevState.shoppingListItems];
-        // console.log("new shopping list items", newShoppingListItems);
         const newShoppingListItem = {
           id: prevState.shoppingListItems.length + 1,
           title: event.target.innerHTML,
-          amount: 1
+          amount: 1,
         };
         newShoppingListItems.push(newShoppingListItem);
         const newState = {
           ...prevState,
           shoppingListItems: newShoppingListItems,
         };
-        // console.log("new state", newState);
+
         return newState;
+
       }
     });
   }
 
   handleClickEmptyCart(event) {
-  //  console.log("button clicked");
     this.setState({ shoppingListItems: [] });
   }
 
   handleChange(event) {
     const { name, value } = event.target;
-  //  console.log("value", value);
     this.setState({ [name]: value });
   }
 
   handleSubmit(event) {
-   
     event.preventDefault();
 
     this.setState((prevState) => {
-     // console.log("this state", this.state, "prev state", prevState);
       const newGroceryItems = [...prevState.groceryItems];
-     // console.log("newGroceryItems", newGroceryItems);
       const newGroceryItem = {
         id: prevState.groceryItems.length + 1,
         title: this.state.title,
       };
-    //  console.log("newGroceryItem", newGroceryItem);
       newGroceryItems.push(newGroceryItem);
       const newStateGrocery = {
         ...prevState,
         groceryItems: newGroceryItems,
       };
-    //  console.log("newstate grocery", newStateGrocery);
+
       return newStateGrocery;
+
     });
   }
 
@@ -105,39 +103,31 @@ class Container extends Component {
     });
 
     const shoppingCartComponents = this.state.shoppingListItems.map((item) => {
-
-   
-    
       return (
         <ShoppingCart
           key={item.id}
           product={item}
           className="list-item-shop"
           value={item.title}
-          
         />
       );
     });
-    //   console.log("grocery", groceryComponents, "shopping", shoppingCartComponents)
+
     return (
-      
       <div className="lists">
-        {console.log(shoppingCartComponents)}
-        <div>
+        <div className="grocery-list">
           <h2>Grocery List</h2>
-           <FormComponent
+          <FormComponent
             handleChange={this.handleChange}
             data={this.state}
             handleSubmit={this.handleSubmit}
           />
-          <ul>{groceryComponents}</ul>
-         
+          <ul className="grocery-ul yellow">{groceryComponents}</ul>
         </div>
-        <div>
+        <div className="shopping-list">
           <h2>Shopping Cart</h2>
-           <button onClick={this.handleClickEmptyCart}>Empty Cart</button>
+          <button onClick={this.handleClickEmptyCart}>Empty Cart</button>
           <ul>{shoppingCartComponents}</ul>
-         
         </div>
       </div>
     );
